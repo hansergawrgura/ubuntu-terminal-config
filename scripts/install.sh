@@ -130,6 +130,23 @@ install_wezterm() {
   fi
 }
 
+# ── 5. Foot ───────────────────────────────────────────────────
+install_foot() {
+  _info "=== Foot ==="
+  if command -v foot >/dev/null 2>&1; then
+    _info "  Already installed: $(foot --version 2>&1)"
+  else
+    _info "  Installing via apt (universe) ..."
+    sudo apt update && sudo apt install -y foot
+  fi
+  deploy_config "$REPO_DIR/configs/foot/foot.ini" "$HOME/.config/foot/foot.ini"
+  if foot --config="$REPO_DIR/configs/foot/foot.ini" --check-config >/dev/null 2>&1; then
+    _info "  Config validation: OK"
+  else
+    _warn "  Config validation: FAILED"
+  fi
+}
+
 # ── Main ──────────────────────────────────────────────────────
 main() {
   _info "ubuntu-terminal-config installer"
@@ -139,13 +156,14 @@ main() {
   install_ghostty;  echo
   install_kitty;    echo
   install_alacritty; echo
-  install_wezterm
+  install_wezterm;  echo
+  install_foot
 
   echo
   _info "=== All done! ==="
-  _info "Configs deployed to ~/.config/{ghostty,kitty,alacritty,wezterm}/"
-  _info "Launch from app menu, or run:  ghostty | kitty | alacritty | wezterm"
-  _info "Guides:  docs/guides/{ghostty,kitty,alacritty,wezterm}.md"
+  _info "Configs deployed to ~/.config/{ghostty,kitty,alacritty,wezterm,foot}/"
+  _info "Launch from app menu, or run:  ghostty | kitty | alacritty | wezterm | foot"
+  _info "Guides:  docs/guides/{ghostty,kitty,alacritty,wezterm,foot}.md"
 }
 
 main "$@"

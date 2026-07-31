@@ -21,7 +21,7 @@ font-synthetic-style = no-bold,no-italic
 
 # ── Theme / appearance ────────────────────────────────────────
 # Auto-switch with system dark/light preference
-theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+theme = Catppuccin Mocha
 background-opacity = 0.92
 background-blur = true
 cursor-style = bar

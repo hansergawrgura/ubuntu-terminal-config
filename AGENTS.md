@@ -13,10 +13,11 @@ configs/
   kitty/kitty.conf        # kitty directive syntax
   alacritty/alacritty.toml  # TOML 1.1
   wezterm/wezterm.lua     # Lua (wezterm.config_builder)
+  foot/foot.ini           # INI (Wayland-only)
 scripts/
   install.sh              # one-click installer + config deployer
 docs/guides/
-  {ghostty,kitty,alacritty,wezterm}.md  # per-terminal quickstart
+  {ghostty,kitty,alacritty,wezterm,foot}.md  # per-terminal quickstart
 AGENTS.md                 # this file
 README.md
 ```
@@ -37,6 +38,7 @@ README.md
 | Kitty     | `kitty +runpy 'from kitty.config import load_config; bad=[]; load_config("configs/kitty/kitty.conf", accumulate_bad_lines=bad); raise SystemExit(1 if bad else 0)'` |
 | Alacritty | `alacritty migrate --config-file configs/alacritty/alacritty.toml --dry-run` |
 | WezTerm   | `luac -p configs/wezterm/wezterm.lua && WEZTERM_CONFIG_FILE=configs/wezterm/wezterm.lua wezterm ls-fonts >/dev/null 2>&1` (check stderr for errors) |
+| Foot      | `foot --config=configs/foot/foot.ini --check-config` |
 
 > All commands must exit 0 with no error output. Run from repo root.
 
@@ -73,7 +75,7 @@ git push -u origin HEAD
 ## Key Design Decisions
 
 - **Font:** Maple Mono NF CN (Nerd Font + CJK glyphs) across all terminals.
-- **Theme:** Catppuccin Mocha (dark) / Latte (light) where auto-switch is supported.
+- **Theme:** Catppuccin Mocha (dark) across all terminals.
 - **Ghostty:** `language = zh` set to prevent CJK font-fallback errors.
 - **Configs deployed via symlinks** so `git pull` propagates changes instantly.
 - **Validation is mandatory** before every commit touching configs.

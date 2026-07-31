@@ -48,8 +48,8 @@ Ghostty ships good defaults, so the repo config only adds the last three rows.
   sudo, title, path). The `sudo` feature restyles the prompt when you're root.
 - `language = zh` is set so CJK glyphs render without font-fallback errors.
   Keep it if you ever read Chinese, Japanese, or Korean text.
-- Run `ghostty +list-themes` to browse the built-in themes. The config
-  auto-switches with the system: `dark:Catppuccin Mocha,light:Catppuccin Latte`.
+- Run `ghostty +list-themes` to browse the built-in themes. The config uses
+  `Catppuccin Mocha` (dark only, matching the other terminals in this repo).
 
 ### Advanced Learning
 

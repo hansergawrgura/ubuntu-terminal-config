@@ -1,23 +1,24 @@
 # ubuntu-terminal-config
 
-Curated configs for four GPU-accelerated terminals on Ubuntu: one font, one
-theme family, one opacity, one installer. Configs deploy as symlinks, so a
-`git pull` in this repo updates every terminal at once.
+Curated configs for five terminals on Ubuntu: one font, one theme, one
+installer. Configs deploy as symlinks, so a `git pull` in this repo updates
+every terminal at once.
 
 ## Terminals
 
-| Terminal  | Version                  | Config format | Config path                          | Install method            |
-|-----------|--------------------------|---------------|--------------------------------------|---------------------------|
-| Ghostty   | 1.3.1                    | key=value     | `~/.config/ghostty/config`           | PPA `mkasberg/ghostty`    |
-| Kitty     | 0.48.2                   | kitty.conf    | `~/.config/kitty/kitty.conf`         | Official binary installer |
-| Alacritty | 0.17.0 (apt has 0.16.1)  | TOML 1.1      | `~/.config/alacritty/alacritty.toml` | apt (universe)            |
-| WezTerm   | 20240203-110809-5046fc22 | Lua           | `~/.config/wezterm/wezterm.lua`      | .deb from GitHub releases |
+| Terminal  | Version                  | Config format | Config path                            | Install method            |
+|-----------|--------------------------|---------------|----------------------------------------|---------------------------|
+| Ghostty   | 1.3.1                    | key=value     | `~/.config/ghostty/config`             | PPA `mkasberg/ghostty`    |
+| Kitty     | 0.48.2                   | kitty.conf    | `~/.config/kitty/kitty.conf`           | Official binary installer |
+| Alacritty | 0.17.0 (apt has 0.16.1)  | TOML 1.1      | `~/.config/alacritty/alacritty.toml`   | apt (universe)            |
+| WezTerm   | 20240203-110809-5046fc22 | Lua           | `~/.config/wezterm/wezterm.lua`        | .deb from GitHub releases |
+| Foot      | 1.25.0                   | INI           | `~/.config/foot/foot.ini`              | apt (universe, Wayland-only) |
 
 ## Features
 
 - Maple Mono NF CN everywhere: Nerd Font icons plus CJK glyphs in one font
-- Catppuccin Mocha theme, with Latte auto-switch where the terminal supports it
-- 0.92 background opacity and a bar cursor across all four
+- Catppuccin Mocha dark theme across all five (unified palette)
+- 0.92 background opacity and a bar/beam cursor across all five
 - Shell integration enabled where available (prompt marks, sudo hint, cwd reporting)
 - 10k+ scrollback lines, copy-on-select, mouse hides while typing
 - Installer validates every config after deploying it and reports per terminal
@@ -36,7 +37,7 @@ Run it as a normal user; it asks for sudo itself. Per terminal, the script:
 3. Symlinks the repo config into `~/.config/<terminal>/`.
 4. Runs that terminal's config validator and prints OK or FAILED.
 
-Target platform: Ubuntu 24.04+/26.04, Wayland or X11.
+Target platform: Ubuntu 24.04+/26.04, Wayland or X11. Foot requires Wayland.
 
 ## Manual install
 
@@ -77,18 +78,23 @@ sudo apt install ./wezterm-*.deb
 ln -sf "$PWD/configs/wezterm/wezterm.lua" ~/.config/wezterm/wezterm.lua
 ```
 
+**Foot**
+
+```bash
+sudo apt install foot   # Wayland only
+ln -sf "$PWD/configs/foot/foot.ini" ~/.config/foot/foot.ini
+```
+
 ## Customization
 
-All four source files live under `configs/<terminal>/`. Edit, save, done:
+All five source files live under `configs/<terminal>/`. Edit, save, done:
 Kitty and Ghostty reload with Ctrl+Shift+comma, WezTerm and Alacritty watch
-their files and reload on save.
+their files and reload on save, Foot reloads on SIGHUP (or restart).
 
-- **Font:** replace `Maple Mono NF CN` in all four configs. Pick another Nerd
+- **Font:** replace `Maple Mono NF CN` in all five configs. Pick another Nerd
   Font with CJK coverage, or CJK fallback gets ugly.
-- **Theme:** Ghostty and WezTerm reference Catppuccin by name. Alacritty has an
-  inline Mocha palette you can swap for an import from
-  [alacritty-theme](https://github.com/alacritty/alacritty-theme). Kitty pulls
-  themes from `kitten themes`.
+- **Theme:** all five carry an inline Catppuccin Mocha palette (or name it
+  directly in Ghostty/WezTerm). Swap colors in any config to re-theme.
 - **Opacity:** grep for `0.92`; each terminal spells the key differently.
 
 Validate before committing (full table in AGENTS.md), from the repo root:
@@ -97,6 +103,7 @@ Validate before committing (full table in AGENTS.md), from the repo root:
 ghostty +validate-config --config-file=configs/ghostty/config
 alacritty migrate --config-file configs/alacritty/alacritty.toml --dry-run
 luac -p configs/wezterm/wezterm.lua
+foot --config=configs/foot/foot.ini --check-config
 ```
 
 ## Guides
@@ -105,6 +112,15 @@ luac -p configs/wezterm/wezterm.lua
 - [Kitty](docs/guides/kitty.md): kittens, layouts, remote control
 - [Alacritty](docs/guides/alacritty.md): Vi mode, search, OSC 52 clipboard
 - [WezTerm](docs/guides/wezterm.md): leader key, Lua config, SSH domains
+- [Foot](docs/guides/foot.md): Wayland-native, lightweight, server mode
+
+## Alternatives
+
+Not covered by this repo, but worth knowing:
+
+- **Black Box** - GNOME Circle terminal, GTK4, polished UI. `flatpak install flathub com.raggesilver.BlackBox`
+- **Ptyxis Terminal** - GNOME's new default terminal (Ubuntu 26.04+). `apt install ptyxis`
+- **tmux / zellij** - Terminal multiplexers, not emulators. Pair with any terminal above for sessions, splits, and persistence. `apt install tmux` or `cargo install zellij`
 
 ## License
 
