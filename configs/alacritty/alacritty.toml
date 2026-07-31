@@ -1,0 +1,116 @@
+# ─────────────────────────────────────────────────────────────
+# Alacritty terminal configuration  (TOML 1.1, v0.17+)
+# Docs:     https://alacritty.org/config-alacritty.html
+# Themes:   https://github.com/alacritty/alacritty-theme
+# Validate this file (headless):
+#   alacritty migrate --config-file "$(pwd)/configs/alacritty/alacritty.toml" --dry-run
+# ─────────────────────────────────────────────────────────────
+
+[general]
+live_config_reload = true
+# To use a theme from alacritty-theme, clone the repo and uncomment:
+#   git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+# import = ["~/.config/alacritty/themes/themes/catppuccin_mocha.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding = { x = 6, y = 6 }
+dynamic_padding = true
+decorations = "Full"
+opacity = 0.92
+startup_mode = "Windowed"
+dynamic_title = true
+class = { instance = "Alacritty", general = "Alacritty" }
+
+[window.dimensions]
+columns = 120
+lines = 32
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Maple Mono NF CN"
+style = "Regular"
+
+[font.bold]
+family = "Maple Mono NF CN"
+style = "Bold"
+
+[font.italic]
+family = "Maple Mono NF CN"
+style = "Italic"
+
+# ── Catppuccin Mocha palette ──────────────────────────────────
+[colors.primary]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[colors.cursor]
+text = "CellBackground"
+cursor = "CellForeground"
+
+[colors.selection]
+text = "CellBackground"
+background = "CellForeground"
+
+[colors.normal]
+black   = "#45475a"
+red     = "#f38ba8"
+green   = "#a6e3a1"
+yellow  = "#f9e2af"
+blue    = "#89b4fa"
+magenta = "#f5c2e7"
+cyan    = "#94e2d5"
+white   = "#bac2de"
+
+[colors.bright]
+black   = "#585b70"
+red     = "#f3779e"
+green   = "#89d88b"
+yellow  = "#ebd391"
+blue    = "#74a8fc"
+magenta = "#f2aac2"
+cyan    = "#85d6c5"
+white   = "#a6adc8"
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+blink_interval = 750
+unfocused_hollow = true
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}\t"
+
+[terminal]
+shell = { program = "/bin/bash" }
+osc52 = "OnlyCopy"
+
+[mouse]
+hide_when_typing = true
+
+[keyboard]
+bindings = [
+  # Font size
+  { key = "Equals", mods = "Control",       action = "IncreaseFontSize" },
+  { key = "Minus",  mods = "Control",       action = "DecreaseFontSize" },
+  { key = "Key0",   mods = "Control",       action = "ResetFontSize" },
+  # New window / instance
+  { key = "N",      mods = "Control|Shift", action = "CreateNewWindow" },
+  # Copy / paste
+  { key = "C",      mods = "Control|Shift", action = "Copy" },
+  { key = "V",      mods = "Control|Shift", action = "Paste" },
+  # Search
+  { key = "F",      mods = "Control|Shift", action = "SearchForward" },
+  { key = "B",      mods = "Control|Shift", action = "SearchBackward" },
+  # Scrollback
+  { key = "PageUp",   mods = "Shift",       action = "ScrollPageUp" },
+  { key = "PageDown", mods = "Shift",       action = "ScrollPageDown" },
+]
