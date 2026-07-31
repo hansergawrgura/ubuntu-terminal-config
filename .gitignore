@@ -1,0 +1,14 @@
+# Local opencode / codegraph state
+.omo/
+.codegraph
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# Keep config directories even when empty (placeholder .gitkeep handled per-dir)
