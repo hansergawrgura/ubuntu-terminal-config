@@ -24,8 +24,10 @@ README.md
 ## Modifying Configs
 
 1. Edit the file under `configs/<terminal>/`.
-2. **Validate before committing** — see the table below.
+2. **Validate before committing** - see the table below.
 3. Test launch the terminal if possible.
+4. Deploy: run `./scripts/install.sh` (re-symlinks all configs), or manually `ln -sf "$PWD/configs/<name>/<file>" ~/.config/<name>/<file>`.
+5. Review and update docs: if behavior changed, update `README.md`, `docs/guides/<name>.md`, and this file accordingly.
 
 ### Validation Commands (headless, no GUI needed)
 
@@ -51,7 +53,10 @@ README.md
 
 ```bash
 git checkout -b feat/<short-description>
-# ... make changes, validate configs ...
+# 1. Make changes under configs/<terminal>/
+# 2. Validate (see table above)
+# 3. Deploy: ./scripts/install.sh
+# 4. Review & update docs (README, guides, AGENTS.md) if behavior changed
 git add -A
 git commit -m "feat: <what changed>"
 git push -u origin HEAD
